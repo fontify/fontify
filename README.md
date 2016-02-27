@@ -7,7 +7,7 @@ First clone and `cd` into the repository.
 
 ```shell
 virtualenv env
-pip install -r requirements.txt
 source env/bin/activate
+pip install -r requirements.txt
 python hello.py
 ```
