@@ -32,4 +32,4 @@ def get_chars():
 
 
 def get_sample_chars():
-    return iter("AaBbCcDd")
+    return iter("AaBbCc")
