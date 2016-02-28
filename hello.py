@@ -4,7 +4,6 @@ import tempfile
 from time import sleep
 from flask import Flask
 from flask import request
-from flask import url_for
 from flask import send_from_directory
 from flask import make_response
 from flask import render_template
@@ -13,14 +12,16 @@ from pdfkit import from_string
 from data import get_chars
 from data import get_sample_chars
 from data import TMPL_OPTIONS
-from werkzeug import secure_filename
 
 UPLOAD_FOLDER = '../upload'
 DOWNLOAD_FOLDER = '../download'
+FONT_NAME = 'fontify.ttf'
 ALLOWED_EXTENSIONS = set(['jpg', 'png', 'jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
+app.config['FONT_NAME'] = FONT_NAME
 
 
 @app.route("/")
@@ -30,7 +31,11 @@ def index():
 
 @app.route("/finish")
 def finish():
-    return render_template('finish.html')
+    key = request.args.get('key')
+    return render_template(
+        'finish.html',
+        url=key + '/' + app.config['FONT_NAME']
+    )
 
 
 @app.route("/template")
@@ -50,6 +55,14 @@ def template():
     response.headers['Content-Disposition'] = "filename=template.pdf"
     response.mimetype = 'application/pdf'
     return response
+
+
+@app.route("/download/<key>/<fontname>")
+def download(key, fontname):
+    return send_from_directory(
+        os.path.join(app.config['DOWNLOAD_FOLDER'], key),
+        fontname
+    )
 
 
 def allowed_file(filename):
