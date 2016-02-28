@@ -22,6 +22,13 @@ def index():
     )
 
 
+@app.route("/finish")
+def finish():
+    return render_template(
+        'finish.html'
+    )
+
+
 @app.route("/template")
 def template():
     html = render_template(

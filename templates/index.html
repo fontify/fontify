@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Fontify - Make Your Own Font!</title>
-    <link rel="stylesheet" type="text/css" href="static/index.css">
-    <link rel="stylesheet" type="text/css" href="static/dropzone.css">
-    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Fontify - Make Your Own Font!{% endblock %}
 
-<h1>Fontify</h1>
+{% block body %}
+<h1 class="index">Fontify</h1>
 <p class="subtitle">Make your own font!</p>
 <a href="/template" target="__blank"><button type="button">print the template</button></a>
 <p>Fill the template, scan it, and upload</p>
@@ -22,11 +16,4 @@
     <p>Upload the scanned template</p>
     <form action="/file-upload" class="dropzone" id="uploadDropzone"></form>
 </div>
-
-</body>
-</html>
-
-<script src="static/dropzone.js"></script>
-<script src="static/index.js"></script>
-
-
+{% endblock %}
