@@ -61,7 +61,8 @@ def template():
 def download(key, fontname):
     return send_from_directory(
         os.path.join(app.config['DOWNLOAD_FOLDER'], key),
-        fontname
+        fontname,
+        as_attachment=True
     )
 
 
@@ -90,4 +91,4 @@ def upload_file():
     return ''
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
