@@ -1,8 +1,18 @@
+<link rel="stylesheet" type="text/css" href="static/template.css">
+
+<h1>Fontify Template</h1>
 <table>
 {% for c_row in chars %}
   <tr>
     {% for c in c_row %}
-      <td>{{ c }}</td>
+      <th>{{ c }}</th>
+    {% endfor %}
+  </tr>
+  <tr>
+    {% for c in c_row %}
+      <td>
+        <div class="char-cell"></div>
+      </td>
     {% endfor %}
   </tr>
 {% endfor %}
