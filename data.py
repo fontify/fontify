@@ -25,7 +25,6 @@ def get_flat_chars():
     chars += unicode(string.uppercase)
     chars += unicode(string.digits)
     chars += unicode(string.punctuation)
-    print chars
     return chars
 
 
