@@ -22,5 +22,5 @@ Dropzone.options.uploadDropzone = {
   maxFilesize: 20, // MB
   maxFiles: 1,
   acceptedFiles: ".png, .jpg",
-  dictDefaultMessage: "drop image here<br>or click to upload"
+  dictDefaultMessage: "Drop image here<br>or click to upload"
 };
