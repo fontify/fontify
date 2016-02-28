@@ -1,0 +1,87 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+    text-align: center;
+    font-family: "Avenir Next", sans-serif;
+    color: white;
+    text-shadow: 0 1px 0 RGB(81, 149, 72);
+    background-color: RGB(136, 196, 37);
+    padding: 50px 0;
+}
+
+h1 {
+    margin: 20px 0 40px 0;
+    font-size: 100px;
+    text-transform: lowercase;
+    font-family: 'Pacifico', cursive;
+    text-shadow: 3px 4px 0 RGB(81, 149, 72);
+}
+
+p.subtitle {
+    font-family: 'Pacifico', cursive;
+    font-size: 32px;
+    text-shadow: 2px 2px 0 RGB(81, 149, 72);
+    opacity: 0.95;
+}
+
+button {
+    cursor: pointer;
+    width: 320px;
+    height: 80px;
+    font-size: 32px;
+    background-color: white;
+    color: RGB(81, 149, 72);
+    border: 0;
+    border-radius: 40px;
+    box-shadow: 2px 2px 1px RGB(81, 149, 72);
+}
+button:active {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.font-name {
+    margin-top: 80px;
+}
+
+.font-name input {
+    width: 320px;
+    height: 80px;
+    border: 0;
+    border-radius: 40px;
+    outline: none;
+    box-shadow: 2px 2px 1px RGB(81, 149, 72);
+    font-size: 32px;
+    padding: 0 40px;
+    text-align: center;
+    color: RGB(81, 149, 72);
+}
+*::-webkit-input-placeholder {
+    color: RGBA(136, 196, 37, 0.5);
+}
+*::-moz-placeholder {
+    color: RGBA(136, 196, 37, 0.5);
+}
+
+.upload {
+    margin-top: 60px;
+}
+
+.upload .dropzone {
+    width: 320px;
+    margin: auto;
+    border-radius: 40px;
+    border: 10px solid rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+}
+
+.upload .dz-message {
+    color: rgba(255, 255, 255, 0.5);
+    text-shadow: none;
+    font-size: 28px;
+    margin: 20px 0 !important;
+}

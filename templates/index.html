@@ -1,13 +1,35 @@
-<link rel="stylesheet" type="text/css" href="static/index.css">
-<link rel="stylesheet" type="text/css" href="static/dropzone.css">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fontify - Make Your Own Font!</title>
+    <link rel="stylesheet" type="text/css" href="static/index.css">
+    <link rel="stylesheet" type="text/css" href="static/dropzone.css">
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+</head>
+<body>
 
-<h1>fontify</h1>
-<p>make your own font!</p>
+<h1>Fontify</h1>
+<p class="subtitle">Make your own font!</p>
+<a href="/template" target="__blank"><button type="button">print the template</button></a>
+<p>Fill the template, scan it, and upload</p>
 
-<a href="/template"><button type="button">print the template</button></a>
+<div class="font-name">
+    <input placeholder="FontifySans"></input>
+    <p>Enter a name for your awesome font</p>
+</div>
 
-<form action="/file-upload"
-      class="dropzone"
-      id="my-awesome-dropzone"></form>
+<div class="upload">
+    <p>Upload the scanned template</p>
+    <form action="/file-upload" class="dropzone" id="uploadDropzone"></form>
+    <script src="static/dropzone.js"></script>
+    <script type="text/javascript">
+        Dropzone.options.uploadDropzone = {
+          maxFilesize: 20, // MB
+          acceptedFiles: "image/*",
+          dictDefaultMessage: "drop image here<br>or click to upload"
+        };
+    </script>
+</div>
 
-<script src="static/dropzone.js"></script>
+</body>
+</html>
