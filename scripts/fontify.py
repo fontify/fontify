@@ -21,7 +21,6 @@ def check_input(image):
 
 def setup_work_dir(image):
     tmpdir = tempfile.mkdtemp(prefix="fontify")
-    print "Temp DIR:", tmpdir
     _, ext = os.path.splitext(image)
     dst = 'input' + ext
     shutil.copyfile(image, os.path.join(tmpdir, dst))
@@ -51,7 +50,6 @@ def tear_down(tmpdir, output):
         output = "fontify.ttf"
     shutil.copyfile(os.path.join(tmpdir, 'fontify.ttf'), output)
     shutil.copyfile(os.path.join(tmpdir, 'fontify.woff'), output[:-3] + 'woff')
-    print(tmpdir)
     # shutil.rmtree(tmpdir)
 
 

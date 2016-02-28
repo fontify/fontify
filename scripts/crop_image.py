@@ -66,7 +66,6 @@ def trim(origin_im, blur=True,
             bbox[1] = 0
             bbox[2] = min(width, bbox[2] + int(width * 0.05))
             bbox[3] = height
-            print bbox
             return im.crop(bbox)
     else:
         # raise Exception("Error while cropping image, there is no bounding box to crop")
