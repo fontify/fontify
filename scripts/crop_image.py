@@ -1,6 +1,6 @@
 from PIL import Image, ImageChops, ImageFilter
 
-from data import PERCENTAGE_TO_CROP
+from data import PERCENTAGE_TO_CROP_SCAN_IMG, CROPPED_IMG_NAME
 
 
 
@@ -15,7 +15,7 @@ def crop_by_percentage(origin_im, percentage):
 
 
 def _trim(origin_im):
-    im = crop_by_percentage(origin_im, PERCENTAGE_TO_CROP)
+    im = crop_by_percentage(origin_im, PERCENTAGE_TO_CROP_SCAN_IMG)
     im = im.filter(ImageFilter.GaussianBlur(radius=3))
 
     bg = Image.new(im.mode, im.size, im.getpixel((0,0)))
@@ -31,7 +31,7 @@ def _trim(origin_im):
 def crop(filepath):
     im = Image.open(filepath)
     im = _trim(im)
-    trimmed_filepath = "cropped_picture.bmp"
+    trimmed_filepath = CROPPED_IMG_NAME
     im.save(trimmed_filepath)
     return trimmed_filepath
 
@@ -41,5 +41,5 @@ if __name__ == "__main__":
     import sys
     trimmed_filepath = crop(sys.argv[1])
     im = Image.open(trimmed_filepath)
-    im.show()
+    print trimmed_filepath
 

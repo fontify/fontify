@@ -7,7 +7,9 @@ from data import (MAX_COLUMNS_PER_PAGE,
                   RELA_PIXELS_WRITING_BOX_HEIGHT,
                   RELA_PIXELS_WRITING_BOX_WIDTH,
                   RELA_PIXELS_BORDER_WIDTH,
-                  get_flat_chars)
+                  get_flat_chars,
+                  PERCENTAGE_TO_CROP_CHAR_IMG,
+                  CUT_CHAR_IMGS_DIR)
 from crop_image import crop, crop_by_percentage
 
 
@@ -47,15 +49,11 @@ def cut(filepath):
     row = 0
     col = 0
 
-    temp_dir = "cutting_output_images"
+    temp_dir = CUT_CHAR_IMGS_DIR
     try:
         os.mkdir(temp_dir)
     except OSError:
-        # 
         pass
-
-    # import pdb
-    # pdb.set_trace()
 
     for char in get_flat_chars():
         left  = border_width + col * (box_width + one_unit)
@@ -64,7 +62,7 @@ def cut(filepath):
         lower = upper + box_height
 
         char_im = im.crop((left, upper, right, lower))
-        char_im = crop_by_percentage(char_im, 0.07)
+        char_im = crop_by_percentage(char_im, PERCENTAGE_TO_CROP_CHAR_IMG)
         char_im.save("./{}/{}.bmp".format(temp_dir, hex(ord(char))))
 
         col += 1
@@ -77,6 +75,7 @@ if __name__ == "__main__":
     import sys
     image_filepath = sys.argv[1]
     cut(image_filepath)
+    print "./{}/".format(CUT_CHAR_IMGS_DIR)
 
 
 

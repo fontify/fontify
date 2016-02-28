@@ -6,7 +6,11 @@ TMPL_OPTIONS = {
     'page-size': 'Letter'
 }
 
-PERCENTAGE_TO_CROP = 0.005
+PERCENTAGE_TO_CROP_SCAN_IMG = 0.005
+PERCENTAGE_TO_CROP_CHAR_IMG = 0.09
+
+CROPPED_IMG_NAME = "cropped_picture.bmp"
+CUT_CHAR_IMGS_DIR = "cutting_output_images"
 
 MAX_COLUMNS_PER_PAGE = 10
 MAX_ROWS_PER_PAEG = 10
