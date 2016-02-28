@@ -17,7 +17,7 @@ Dropzone.options.uploadDropzone = {
       $("#submit-all").hide();
     });
 
-    this.on("addedfile", function() { 
+    this.on("addedfile", function() {
       $("#submit-all").show();
       $("#upload-file-validation").text("Upload the scanned template");
       $("#upload-file-validation").removeClass("alert");

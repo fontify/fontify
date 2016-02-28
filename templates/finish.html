@@ -5,6 +5,10 @@
 <h1>Cheers!</h1>
 <p id="ready-to-use" class="subtitle">Your font is ready to use!</p>
 <a href="/download/{{ key }}/fontify.ttf"><button class="gradient-rect">download .ttf file</button></a>
+<form method="POST" action="/email/{{ key }}/fontify.ttf">
+    <input name="email" placeholder="example@gmail.com"></input>
+    <input class="gradient-rect" type="submit">send via email</input>
+</form>
 
 <style type="text/css">
 @font-face {

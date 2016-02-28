@@ -1,13 +1,15 @@
 import os
 import subprocess
 import tempfile
-from time import sleep
 from flask import Flask
 from flask import request
 from flask import send_from_directory
+from flask import url_for
+from flask import redirect
 from flask import make_response
 from flask import render_template
 from flask import jsonify
+from flask.ext.mandrill import Mandrill
 from pdfkit import from_string
 from data import get_chars
 from data import get_sample_chars
@@ -20,6 +22,8 @@ ALLOWED_EXTENSIONS = set(['jpg', 'png', 'jpeg'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
+app.config.from_envvar('FONTIFY_SETTINGS')
+mandrill = Mandrill(app)
 
 
 @app.route("/")
@@ -66,6 +70,17 @@ def download(key, fontname):
     )
 
 
+@app.route("/email/<key>/<fontname>", methods=['POST'])
+def email(key, fontname):
+    recipient = request.form['email']
+    addr = url_for('download', key=key, fontname=fontname)
+    mandrill.send_email(
+        to=[{'email': recipient}],
+        html=render_template('email.html', addr=addr)
+    )
+    return redirect(url_for('finish', key=key, fontname=fontname))
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -86,7 +101,7 @@ def upload_file():
             font_name = request.form['font-name']
             key = filename.split('/')[-1].split('.')[0]
             os.mkdir(os.path.join(app.config['DOWNLOAD_FOLDER'], key))
-            subprocess.call(["python", "scripts/fontify.py", "-n", font_name, "-o", app.config['DOWNLOAD_FOLDER'] + "/" + key + "/" + "fontify.ttf", filename])
+            subprocess.call(["python", "scripts/fontify.py", "-n", font_name, "-o", os.path.join(app.config['DOWNLOAD_FOLDER'], key, "fontify.ttf"), filename])
             return jsonify(font_name=font_name, key=key)
     return ''
 
