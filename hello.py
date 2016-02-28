@@ -15,7 +15,7 @@ from data import TMPL_OPTIONS
 
 UPLOAD_FOLDER = '../upload'
 DOWNLOAD_FOLDER = '../download'
-FONT_NAME = 'fontify.ttf'
+FONT_NAME = 'fontify'
 ALLOWED_EXTENSIONS = set(['jpg', 'png', 'jpeg'])
 
 app = Flask(__name__)
@@ -32,9 +32,11 @@ def index():
 @app.route("/finish")
 def finish():
     key = request.args.get('key')
+    font_name = request.args.get('font-name', app.config['FONT_NAME'])
     return render_template(
         'finish.html',
-        url=key + '/' + app.config['FONT_NAME']
+        key=key,
+        font_name=font_name
     )
 
 

@@ -4,19 +4,19 @@
 {% block body %}
 <h1>Cheers!</h1>
 <p class="subtitle">Your font is ready to use!</p>
-<a href="/download/{{ url }}"><button class="gradient-rect">download .ttf file</button></a>
+<a href="/download/{{ key }}/{{ font_name }}.ttf"><button class="gradient-rect">download .ttf file</button></a>
 
 <div class="use-font">
-	<p class="subtitle">Use as webfont</p>
+    <p class="subtitle">Use as webfont</p>
     <p>Add the following lines to your CSS:</p>
     <pre class="gradient-rect lighter">@font-face {
-  font-family: FontifySans;
-  src: url(http://fontifyapp.com/FontifySans.woff);
+  font-family: {{ font_name }};
+  src: url(http://fontifyapp.com/{{ font_name }}.ttf);
 }
 
-/* Then use FontifySans like this: */
+/* Then use {{ font_name }} like this: */
 p {
-  font-family: FontifySans, sans-serif;
+  font-family: {{ font_name }}, sans-serif;
 }</pre>
 </div>
 {% endblock %}
