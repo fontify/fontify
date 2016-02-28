@@ -1,5 +1,6 @@
 import os
 import subprocess
+import tempfile
 from time import sleep
 from flask import Flask
 from flask import request
@@ -14,8 +15,9 @@ from data import get_sample_chars
 from data import TMPL_OPTIONS
 from werkzeug import secure_filename
 
-UPLOAD_FOLDER = '/tmp'
-ALLOWED_EXTENSIONS = set(['jpg', 'png'])
+UPLOAD_FOLDER = '../upload'
+DOWNLOAD_FOLDER = '../download'
+ALLOWED_EXTENSIONS = set(['jpg', 'png', 'jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -60,23 +62,19 @@ def upload_file():
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            font_name = request.form['font-name']
-            return_url = url_for('uploaded_file', filename=filename)
-            # subprocess.call(["python", "scripts/fontify.py"])
-            sleep(5)
-            return jsonify(
-                rul=return_url,
-                font_name=font_name,
-                filename=filename
+            _, ext = os.path.splitext(file.filename)
+            f, filename = tempfile.mkstemp(
+                prefix='',
+                suffix=ext,
+                dir=app.config['UPLOAD_FOLDER']
             )
+            file.save(filename)
+            font_name = request.form['font-name']
+            # subprocess.call(["python", "scripts/fontify.py"])
+            sleep(1)
+            key = filename.split('/')[-1].split('.')[0]
+            return jsonify(font_name=font_name, key=key)
     return ''
-
-
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == "__main__":
     app.run(debug=True)
