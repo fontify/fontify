@@ -83,9 +83,8 @@ def upload_file():
             )
             file.save(filename)
             font_name = request.form['font-name']
-            # subprocess.call(["python", "scripts/fontify.py"])
-            sleep(1)
             key = filename.split('/')[-1].split('.')[0]
+            subprocess.call(["python", "scripts/fontify.py", "-n", font_name, "-o", app.config['UPLOAD_FOLDER'] + "/" + key + "/" + "fontify.ttf", filename])
             return jsonify(font_name=font_name, key=key)
     return ''
 
