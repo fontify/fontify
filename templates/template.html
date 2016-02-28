@@ -1,0 +1,9 @@
+<table>
+{% for c_row in chars %}
+  <tr>
+    {% for c in c_row %}
+      <td>{{ c }}</td>
+    {% endfor %}
+  </tr>
+{% endfor %}
+</table>
