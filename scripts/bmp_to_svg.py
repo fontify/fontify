@@ -3,6 +3,12 @@ import os
 import sys
 import subprocess
 import crop_image
+from PIL import Image, ImageChops
+
+
+def is_white(filepath):
+    img = Image.open(filepath)
+    return not ImageChops.invert(img).getbbox()
 
 
 def bmp_to_svg(basedir):
@@ -23,6 +29,9 @@ def bmp_to_svg(basedir):
                 sys.stderr.write("Error converting %s to binary\n" % infile)
                 continue
             crop_image.crop_char(outfile)
+            if is_white(outfile):
+                print "Skipping empty character", outfile
+                continue
             infile = outfile
             outfile = os.path.join(basedir, 'svg', name + '.svg')
             ret = subprocess.call(
