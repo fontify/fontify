@@ -3,7 +3,6 @@ import subprocess
 from time import sleep
 from flask import Flask
 from flask import request
-from flask import redirect
 from flask import url_for
 from flask import send_from_directory
 from flask import make_response
@@ -67,7 +66,11 @@ def upload_file():
             return_url = url_for('uploaded_file', filename=filename)
             # subprocess.call(["python", "scripts/fontify.py"])
             sleep(5)
-            return jsonify(rul=return_url, font_name=font_name, filename=filename)
+            return jsonify(
+                rul=return_url,
+                font_name=font_name,
+                filename=filename
+            )
     return ''
 
 
