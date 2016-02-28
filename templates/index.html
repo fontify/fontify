@@ -8,12 +8,21 @@
 <p>Fill the template, scan it, and upload</p>
 
 <div class="font-name">
-    <input placeholder="FontifySans"></input>
+    <input id="font-name-input" placeholder="FontifySans"></input>
+    <script type="text/javascript">
+    $(function() {
+        $("#font-name-input").on("change keyup paste click", function(e) {
+            $("#font-name").val(e.target.value);
+        });
+    });
+    </script>
     <p>Enter a name for your awesome font</p>
 </div>
 
 <div class="upload">
     <p>Upload the scanned template</p>
-    <form action="/upload-file" class="dropzone" id="uploadDropzone"></form>
+    <form action="/upload-file" class="dropzone" id="uploadDropzone">
+        <input type="hidden" id="font-name" name="font-name"></input>
+    </form>
 </div>
 {% endblock %}
