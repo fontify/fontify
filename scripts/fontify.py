@@ -31,7 +31,7 @@ def setup_work_dir(image):
 
 
 def process(tmpdir, image, font_name):
-    crop_image.crop(os.path.join(tmpdir, image))
+    crop_image.crop_whole(os.path.join(tmpdir, image))
     cut_into_multiple_images.cut(os.path.join(tmpdir, data.CROPPED_IMG_NAME))
     bmp_to_svg.bmp_to_svg(tmpdir)
     scriptdir = os.path.realpath(os.path.dirname(__file__))

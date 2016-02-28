@@ -2,6 +2,7 @@
 import os
 import sys
 import subprocess
+import crop_image
 
 
 def bmp_to_svg(basedir):
@@ -21,6 +22,7 @@ def bmp_to_svg(basedir):
             if ret != 0:
                 sys.stderr.write("Error converting %s to binary\n" % infile)
                 continue
+            crop_image.crop_char(outfile)
             infile = outfile
             outfile = os.path.join(basedir, 'svg', name + '.svg')
             ret = subprocess.call(

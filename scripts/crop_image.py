@@ -8,7 +8,7 @@ from data import PERCENTAGE_TO_CROP_SCAN_IMG, CROPPED_IMG_NAME
 
 def crop_by_percentage(origin_im, percentage):
     width, height = origin_im.size
-    left  = int(percentage * width)
+    left = int(percentage * width)
     upper = int(percentage * height)
     right = int((1 - percentage) * width)
     lower = int((1 - percentage) * height)
@@ -43,31 +43,37 @@ def crop_by_percentage(origin_im, percentage):
 #     cv2.imwrite("detected_circles.bmp", cimg)
 
 
-def trim(origin_im, pre_percentage=None, upper_lower_cut=True):
-    if pre_percentage:
-        pre_percentage_to_crop = pre_percentage
+def trim(origin_im, blur=True,
+         pre_percentage=PERCENTAGE_TO_CROP_SCAN_IMG, upper_lower_cut=True):
+    im = crop_by_percentage(origin_im, pre_percentage)
+    if blur:
+        im_blurred = im.filter(ImageFilter.GaussianBlur(radius=2))
+        bg = Image.new(im_blurred.mode, im_blurred.size, im.getpixel((0, 0)))
+        diff = ImageChops.difference(im_blurred, bg)
+        diff = ImageChops.add(diff, diff, 2.0, -100)
+        bbox = diff.getbbox()
     else:
-        pre_percentage_to_crop = PERCENTAGE_TO_CROP_SCAN_IMG
-    im_unblurred = crop_by_percentage(origin_im, pre_percentage_to_crop)
-    im = im_unblurred.filter(ImageFilter.GaussianBlur(radius=2))
-
-    bg = Image.new(im.mode, im.size, im.getpixel((0,0)))
-    diff = ImageChops.difference(im, bg)
-    diff = ImageChops.add(diff, diff, 2.0, -100)
-    bbox = diff.getbbox()
+        bg = Image.new(im.mode, im.size, im.getpixel((0, 0)))
+        diff = ImageChops.difference(im, bg)
+        bbox = diff.getbbox()
     if bbox:
         if upper_lower_cut:
-            return im_unblurred.crop(bbox)
+            return im.crop(bbox)
         else:
-            width, height = im_unblurred.size
-            left, upper, right, lower = bbox
-            return im_unblurred.crop((int(left - width * 0.1), 0, int(right + width * 0.1), height))
+            width, height = im.size
+            bbox = list(bbox)
+            bbox[0] = max(0, bbox[0] - int(width * 0.05))
+            bbox[1] = 0
+            bbox[2] = min(width, bbox[2] + int(width * 0.05))
+            bbox[3] = height
+            print bbox
+            return im.crop(bbox)
     else:
         # raise Exception("Error while cropping image, there is no bounding box to crop")
-        return im_unblurred
+        return im
 
 
-def crop(filepath):
+def crop_whole(filepath):
     im = Image.open(filepath)
     im = trim(im)
     trimmed_filepath = os.path.join(
@@ -78,10 +84,15 @@ def crop(filepath):
     return trimmed_filepath
 
 
+def crop_char(filepath):
+    im = Image.open(filepath)
+    im = trim(im, blur=False, pre_percentage=0, upper_lower_cut=False)
+    im.save(filepath)
+
+
 # for MANUAL unit test
 if __name__ == "__main__":
     import sys
-    trimmed_filepath = crop(sys.argv[1])
+    trimmed_filepath = crop_whole(sys.argv[1])
     im = Image.open(trimmed_filepath)
     print trimmed_filepath
-
