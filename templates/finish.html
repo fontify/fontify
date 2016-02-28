@@ -4,7 +4,7 @@
 {% block body %}
 <h1>Cheers!</h1>
 <p id="ready-to-use" class="subtitle">Your font is ready to use!</p>
-<a href="/download/{{ key }}/fontify.ttf"><button class="gradient-rect">download .ttf file</button></a>
+<a href="/download/{{ key }}/fontify.ttf"><button class="gradient-rect">Download .ttf file</button></a>
 
 <!-- 
 <p style="margin-top: 20px;">Send via email</p>
@@ -52,8 +52,8 @@
     src: url(/download/{{ key }}/fontify.woff);
 }
 textarea {
-    font-family: {{ font_name }};
-    font-size: 24px;
+    font-family: {{ font_name }}, sans-serif;
+    font-size: 36px;
     height: 200px;
 }
 .playground .subtitle {
