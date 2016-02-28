@@ -3,7 +3,6 @@ import subprocess
 from time import sleep
 from flask import Flask
 from flask import request
-from flask import redirect
 from flask import url_for
 from flask import send_from_directory
 from flask import make_response
@@ -24,16 +23,12 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def index():
-    return render_template(
-        'index.html'
-    )
+    return render_template('index.html')
 
 
 @app.route("/finish")
 def finish():
-    return render_template(
-        'finish.html'
-    )
+    return render_template('finish.html')
 
 
 @app.route("/template")
@@ -71,14 +66,17 @@ def upload_file():
             return_url = url_for('uploaded_file', filename=filename)
             # subprocess.call(["python", "scripts/fontify.py"])
             sleep(5)
-            return jsonify(rul=return_url, font_name=font_name, filename=filename)
+            return jsonify(
+                rul=return_url,
+                font_name=font_name,
+                filename=filename
+            )
     return ''
 
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == "__main__":
     app.run(debug=True)

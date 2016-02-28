@@ -1,23 +1,28 @@
+<link rel="stylesheet" type="text/css" href="static/template.css">
 <h1>Fontify Template</h1>
-<table>
-{% for c_row in chars %}
-  <tr>
-  {% for c in c_row %}
-    <th{% if c == ' ' %} class="empty"{% endif %}>{{ c }}</th>
+<div class="wrapper">
+  <div class="anchor upper"></div>
+  <div class="anchor lower"></div>
+  <table>
+  {% for c_row in chars %}
+    <tr>
+    {% for c in c_row %}
+      <th{% if c == ' ' %} class="empty"{% endif %}>{{ c }}</th>
+    {% endfor %}
+    </tr>
+    <tr>
+    {% for c in c_row %}
+      <td>
+        <div class="char-cell">
+          <div class="ref-line-top"></div>
+          <div class="ref-line-bottom"></div>
+        {% if c == ' ' %}
+          <div class="sample-char">{{ sample.next() }}</div>
+        {% endif %}
+        </div>
+      </td>
+    {% endfor %}
+    </tr>
   {% endfor %}
-  </tr>
-  <tr>
-  {% for c in c_row %}
-    <td>
-      <div class="char-cell">
-        <div class="ref-line-top"></div>
-        <div class="ref-line-bottom"></div>
-      {% if c == ' ' %}
-        <div class="sample-char">{{ sample.next() }}</div>
-      {% endif %}
-      </div>
-    </td>
-  {% endfor %}
-  </tr>
-{% endfor %}
-</table>
+  </table>
+</div>

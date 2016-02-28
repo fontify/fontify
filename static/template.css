@@ -1,11 +1,11 @@
 h1 {
 	text-align: center;
-	margin-bottom: 50px;
+	margin-bottom: 35px;
 }
 
 table {
-	border-collapse: collapse;
 	border-spacing: 0px;
+	border-collapse: collapse;
 	border: 2px solid black;
 }
 
@@ -45,4 +45,29 @@ th, td {
 	text-align: center;
 	font-size: 60px;
 	line-height: 50px;
+}
+
+.anchor {
+	content: "";
+	background-color: black;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.upper {
+	top: 0px;
+	left: 0px;
+}
+
+.lower {
+	bottom: 0px;
+	right: 0px;
+}
+
+.wrapper {
+	display: inline-block;
+	position: relative;
+	padding: 15px;
 }
