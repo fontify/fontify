@@ -3,33 +3,53 @@ import argparse
 import tempfile
 import shutil
 import os
+import subprocess
+
 import crop_image
+import cut_into_multiple_images
+import bmp_to_svg
+import data
 
 
 def check_input(image):
     if not os.path.isfile(image):
         raise FileNotFoundError
     _, ext = os.path.splitext(image)
-    if ext.lower() not in [".jpg", ".png"]:
+    if ext.lower() not in [".jpg", ".jpeg", ".png"]:
         raise ValueError("Unrecognized image extension")
 
 
 def setup_work_dir(image):
     tmpdir = tempfile.mkdtemp(prefix="fontify")
+    print "Temp DIR:", tmpdir
     _, ext = os.path.splitext(image)
-    shutil.copyfile(image, os.path.join(tmpdir, 'input' + ext))
-    return tmpdir
+    dst = 'input' + ext
+    shutil.copyfile(image, os.path.join(tmpdir, dst))
+    os.mkdir(os.path.join(tmpdir, 'bmp'))
+    os.mkdir(os.path.join(tmpdir, 'svg'))
+    return tmpdir, dst
 
 
-def process(image, font_name):
-    crop_image.crop()
+def process(tmpdir, image, font_name):
+    crop_image.crop(os.path.join(tmpdir, image))
+    cut_into_multiple_images.cut(os.path.join(tmpdir, data.CROPPED_IMG_NAME))
+    bmp_to_svg.bmp_to_svg(tmpdir)
+    scriptdir = os.path.realpath(os.path.dirname(__file__))
+    sh_fullpath = os.path.join(scriptdir, 'svg_to_ttf.sh')
+    svgdir = os.path.join(tmpdir, 'svg')
+    subprocess.call(
+        [sh_fullpath, font_name, svgdir, os.path.join(tmpdir, 'svg')],
+        #['ls'],
+        cwd=tmpdir
+    )
 
 
 def tear_down(tmpdir, output):
     if output == "":
         output = "fontify.ttf"
     shutil.copyfile(os.path.join(tmpdir, 'fontify.ttf'), output)
-    shutil.rmtree(tmpdir)
+    print(tmpdir)
+    # shutil.rmtree(tmpdir)
 
 
 if __name__ == "__main__":
@@ -46,6 +66,6 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     check_input(args.image)
-    tmpdir = setup_work_dir()
-    process(tmpdir, args.name)
-    tear_down(tmpdir, args.output)
+    tmpdir, image = setup_work_dir(args.image)
+    process(tmpdir, image, args.name)
+    tear_down(tmpdir, args.o)

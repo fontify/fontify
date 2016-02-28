@@ -41,6 +41,7 @@ def _calculate_actual_pixels(image_width, image_height):
 
 def cut(filepath):
     im = Image.open(filepath)
+    imdir = os.path.dirname(filepath)
     image_width, image_height = im.size
 
     actual_pixels = _calculate_actual_pixels(image_width, image_height)
@@ -48,12 +49,6 @@ def cut(filepath):
 
     row = 0
     col = 0
-
-    temp_dir = CUT_CHAR_IMGS_DIR
-    try:
-        os.mkdir(temp_dir)
-    except OSError:
-        pass
 
     for char in get_flat_chars():
         left  = border_width + col * (box_width + one_unit)
@@ -63,7 +58,7 @@ def cut(filepath):
 
         char_im = im.crop((left, upper, right, lower))
         char_im = crop_by_percentage(char_im, PERCENTAGE_TO_CROP_CHAR_IMG)
-        char_im.save("./{}/{}.bmp".format(temp_dir, hex(ord(char))))
+        char_im.save("{}/bmp/{}.bmp".format(imdir, hex(ord(char))))
 
         col += 1
         if col >= 10:

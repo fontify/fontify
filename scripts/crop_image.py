@@ -1,3 +1,4 @@
+import os
 from PIL import Image, ImageChops, ImageFilter
 
 from data import PERCENTAGE_TO_CROP_SCAN_IMG, CROPPED_IMG_NAME
@@ -15,15 +16,15 @@ def crop_by_percentage(origin_im, percentage):
 
 
 def _trim(origin_im):
-    im = crop_by_percentage(origin_im, PERCENTAGE_TO_CROP_SCAN_IMG)
-    im = im.filter(ImageFilter.GaussianBlur(radius=3))
+    im_unblurred = crop_by_percentage(origin_im, PERCENTAGE_TO_CROP_SCAN_IMG)
+    im = im_unblurred.filter(ImageFilter.GaussianBlur(radius=2))
 
     bg = Image.new(im.mode, im.size, im.getpixel((0,0)))
     diff = ImageChops.difference(im, bg)
     diff = ImageChops.add(diff, diff, 2.0, -100)
     bbox = diff.getbbox()
     if bbox:
-      return im.crop(bbox)
+      return im_unblurred.crop(bbox)
     else:
       raise Exception("Error while cropping image, there is no bounding box to crop")
 
@@ -31,7 +32,10 @@ def _trim(origin_im):
 def crop(filepath):
     im = Image.open(filepath)
     im = _trim(im)
-    trimmed_filepath = CROPPED_IMG_NAME
+    trimmed_filepath = os.path.join(
+        os.path.dirname(filepath),
+        CROPPED_IMG_NAME
+    )
     im.save(trimmed_filepath)
     return trimmed_filepath
 
