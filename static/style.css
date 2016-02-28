@@ -20,6 +20,7 @@ body {
     color: white;
     text-shadow: 0 1px 0 RGB(81, 149, 72);
     background-color: RGB(136, 196, 37);
+    background-image: radial-gradient(circle 600px at 45% 170px, #BCE555 0%, RGB(136, 196, 37) 100%);
     padding: 50px 0 30px 0;
 }
 
@@ -127,6 +128,7 @@ footer p {
 @media only screen and (max-device-width: 480px) {
     body {
         padding: 10px 0 20px 0;
+        background-image: radial-gradient(circle 300px at 30% 100px, #BCE555 0%, RGB(136, 196, 37) 100%);
     }
     h1 {
         font-size: 72px;
