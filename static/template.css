@@ -4,6 +4,7 @@ h1 {
 }
 
 table {
+	position: relative;
 	border-collapse: collapse;
 	border-spacing: 0px;
 	border: 2px solid black;
@@ -45,4 +46,22 @@ th, td {
 	text-align: center;
 	font-size: 60px;
 	line-height: 50px;
+}
+
+.anchor {
+	background-color: black;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.upper {
+	top: 0;
+	left: 0;
+}
+
+.lower {
+	bottom: 0;
+	right: 0;
 }

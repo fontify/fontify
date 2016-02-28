@@ -1,5 +1,7 @@
+<link rel="stylesheet" type="text/css" href="static/template.css">
 <h1>Fontify Template</h1>
 <table>
+  <div class="anchor upper"></div>
 {% for c_row in chars %}
   <tr>
   {% for c in c_row %}
@@ -20,4 +22,5 @@
   {% endfor %}
   </tr>
 {% endfor %}
+  <div class="anchor lower"></div>
 </table>
