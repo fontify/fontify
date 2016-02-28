@@ -111,6 +111,9 @@ button.gradient-rect:active {
 textarea::-webkit-input-placeholder {
     color: RGBA(81, 149, 72, 0.5);
 }
+textarea::-moz-placeholder {
+    color: RGBA(81, 149, 72, 0.5);
+}
 
 pre, textarea {
     text-align: left;
@@ -145,7 +148,7 @@ footer p {
     p.subtitle {
         font-size: 28px;
     }
-    pre {
+    pre, textarea {
         max-width: 100%;
     }
 }
