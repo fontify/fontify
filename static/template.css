@@ -1,3 +1,8 @@
+h1 {
+	text-align: center;
+	margin-bottom: 50px;
+}
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0px;
@@ -12,4 +17,19 @@ th, td {
 .char-cell {
 	height: 90px;
 	width: 90px;
+	position: relative;
+}
+
+.ref-line-top, .ref-line-bottom {
+	position: absolute;
+	width: 100%;
+	border-bottom: 2px dotted #ddd;
+}
+
+.ref-line-top {
+	top: 28px;
+}
+
+.ref-line-bottom {
+	top: 58px;
 }
