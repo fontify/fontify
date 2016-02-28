@@ -4,11 +4,11 @@
 {% block body %}
 <h1 class="index">Fontify</h1>
 <p class="subtitle">Make your own font!</p>
-<a href="/template" target="_blank"><button type="button">print the template</button></a>
+<a href="/template" target="_blank"><button class="gradient-rect">Print the template</button></a>
 <p>Fill the template, scan it, and upload</p>
 
 <div class="font-name">
-    <input id="font-name-input" placeholder="FontifySans"></input>
+    <input class="gradient-rect" id="font-name-input" placeholder="Enter a name"></input>
     <script type="text/javascript">
     $(function() {
         $("#font-name-input").on("change keyup paste click", function(e) {
