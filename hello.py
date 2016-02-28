@@ -1,5 +1,8 @@
 import os
-from flask import Flask, request, redirect, url_for, render_template
+from flask import Flask
+from flask import request
+from flask import make_response
+from flask import render_template
 from pdfkit import from_string
 from data import get_chars
 from werkzeug import secure_filename
@@ -10,11 +13,13 @@ ALLOWED_EXTENSIONS = set(['jpg', 'png'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
 @app.route("/")
 def index():
     return render_template(
         'index.html'
     )
+
 
 @app.route("/template")
 def template():
@@ -28,9 +33,11 @@ def template():
     response.mimetype = 'application/pdf'
     return response
 
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
 
 @app.route("/file-upload", methods=['POST'])
 def file_upload():
@@ -39,8 +46,7 @@ def file_upload():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # return redirect(url_for('uploaded_file',
-                                    # filename=filename))
+            # return redirect(url_for('uploaded_file', filename=filename))
             return "save sucess"
     return "lalala"
 
