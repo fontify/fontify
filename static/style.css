@@ -26,6 +26,10 @@ body {
     padding: 50px 0 30px 0;
 }
 
+button, input {
+    font-family: -apple-system, sans-serif;
+}
+
 h1 {
     margin: 20px 0 40px 0;
     font-size: 100px;
@@ -108,11 +112,16 @@ button.gradient-rect:active {
 .use-font .subtitle {
     margin-bottom: 0;
 }
+textarea::-webkit-input-placeholder {
+    color: RGBA(81, 149, 72, 0.5);
+}
+textarea::-moz-placeholder {
+    color: RGBA(81, 149, 72, 0.5);
+}
 
-pre {
+pre, textarea {
     text-align: left;
     width: 480px;
-    overflow-x: scroll;
     margin: auto;
     border-radius: 20px;
     padding: 16px 24px;
@@ -120,6 +129,9 @@ pre {
     color: RGB(27, 103, 107);
     text-shadow: none;
     box-shadow: 2px 3px 0 RGB(81, 149, 72);
+}
+pre {
+    overflow-x: scroll;
 }
 
 footer {
@@ -140,7 +152,7 @@ footer p {
     p.subtitle {
         font-size: 28px;
     }
-    pre {
+    pre, textarea {
         max-width: 100%;
     }
 }

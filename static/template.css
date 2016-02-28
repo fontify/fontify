@@ -27,11 +27,11 @@ th, td {
 }
 
 .ref-line-top {
-	top: 15px;
+	top: 18px;
 }
 
 .ref-line-bottom {
-	top: 45px;
+	top: 40px;
 }
 
 .empty {
@@ -43,7 +43,7 @@ th, td {
 	font-family: Georgia;
 	font-style: italic;
 	text-align: center;
-	font-size: 60px;
+	font-size: 46px;
 	line-height: 50px;
 }
 
