@@ -1,5 +1,6 @@
 import string
 
+ROWS = 12
 COLUMNS = 14
 TMPL_OPTIONS = {
     'page-size': 'Letter'
@@ -18,6 +19,7 @@ def get_chars():
     chars = get_flat_chars()
     result = [chars[i:i + COLUMNS] for i in xrange(0, len(chars), COLUMNS)]
     result[-1] = result[-1].ljust(COLUMNS)
+    result.extend([' ' * COLUMNS for i in xrange(len(result), ROWS)])
     return result
 
 

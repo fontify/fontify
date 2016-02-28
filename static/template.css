@@ -34,6 +34,10 @@ th, td {
 	top: 45px;
 }
 
+.empty {
+	height: 30px;
+}
+
 .sample-char {
 	color: #ccc;
 	font-family: Georgia;
