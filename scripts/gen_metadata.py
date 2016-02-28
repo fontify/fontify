@@ -1,7 +1,6 @@
 import sys
-sys.path.append('../')
-
 import json
+
 from data import get_flat_chars
 
 metadata = {
