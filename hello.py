@@ -4,7 +4,6 @@ import tempfile
 from time import sleep
 from flask import Flask
 from flask import request
-from flask import url_for
 from flask import send_from_directory
 from flask import make_response
 from flask import render_template
@@ -13,14 +12,16 @@ from pdfkit import from_string
 from data import get_chars
 from data import get_sample_chars
 from data import TMPL_OPTIONS
-from werkzeug import secure_filename
 
 UPLOAD_FOLDER = '../upload'
 DOWNLOAD_FOLDER = '../download'
+FONT_NAME = 'fontify'
 ALLOWED_EXTENSIONS = set(['jpg', 'png', 'jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
+app.config['FONT_NAME'] = FONT_NAME
 
 
 @app.route("/")
@@ -30,7 +31,13 @@ def index():
 
 @app.route("/finish")
 def finish():
-    return render_template('finish.html')
+    key = request.args.get('key')
+    font_name = request.args.get('font-name', app.config['FONT_NAME'])
+    return render_template(
+        'finish.html',
+        key=key,
+        font_name=font_name
+    )
 
 
 @app.route("/template")
@@ -52,6 +59,14 @@ def template():
     return response
 
 
+@app.route("/download/<key>/<fontname>")
+def download(key, fontname):
+    return send_from_directory(
+        os.path.join(app.config['DOWNLOAD_FOLDER'], key),
+        fontname
+    )
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -70,9 +85,8 @@ def upload_file():
             )
             file.save(filename)
             font_name = request.form['font-name']
-            # subprocess.call(["python", "scripts/fontify.py"])
-            sleep(1)
             key = filename.split('/')[-1].split('.')[0]
+            subprocess.call(["python", "scripts/fontify.py", "-n", font_name, "-o", app.config['UPLOAD_FOLDER'] + "/" + key + "/" + "fontify.ttf", filename])
             return jsonify(font_name=font_name, key=key)
     return ''
 
