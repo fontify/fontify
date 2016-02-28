@@ -9,7 +9,7 @@ metadata = {
         "ascent": 800,
         "descent": 200,
         "em": 1000,
-        "family": "Example"
+        "family": sys.argv[1]
     },
     "input": "svg",
     "output": ["fontify.ttf"],
