@@ -1,5 +1,6 @@
 import os
 import subprocess
+from time import sleep
 from flask import Flask
 from flask import request
 from flask import redirect
@@ -7,6 +8,7 @@ from flask import url_for
 from flask import send_from_directory
 from flask import make_response
 from flask import render_template
+from flask import jsonify
 from pdfkit import from_string
 from data import get_chars
 from data import get_sample_chars
@@ -65,10 +67,11 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            print filename
-            print url_for('uploaded_file', filename=filename)
-            subprocess.call(["ls", "-l"])
-            return redirect(url_for('uploaded_file', filename=filename))
+            font_name = request.form['font-name']
+            return_url = url_for('uploaded_file', filename=filename)
+            # subprocess.call(["python", "scripts/fontify.py"])
+            sleep(5)
+            return jsonify(rul=return_url, font_name=font_name, filename=filename)
     return ''
 
 
