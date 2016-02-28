@@ -4,18 +4,12 @@ TMPL_OPTIONS = {
     'page-size': 'Letter'
 }
 
+ROWS = 12
+COLUMNS = 14
 PERCENTAGE_TO_CROP_SCAN_IMG = 0.005
-PERCENTAGE_TO_CROP_CHAR_IMG = 0.1
 
 CROPPED_IMG_NAME = "cropped_picture.bmp"
 CUT_CHAR_IMGS_DIR = "cutting_output_images"
-
-MAX_COLUMNS_PER_PAGE = 14
-MAX_ROWS_PER_PAGE = 12
-RELA_PIXELS_CHARACTER_BAR_HEIGHT = 30
-RELA_PIXELS_WRITING_BOX_HEIGHT = 70
-RELA_PIXELS_WRITING_BOX_WIDTH = 70
-RELA_PIXELS_BORDER_WIDTH = 2
 
 
 def get_flat_chars():
@@ -26,18 +20,22 @@ def get_flat_chars():
     return chars
 
 
-def get_chars():
+def get_grouped_chars():
     chars = get_flat_chars()
-    result = [
-        chars[i:i + MAX_COLUMNS_PER_PAGE]
-        for i in xrange(0, len(chars), MAX_COLUMNS_PER_PAGE)
+    return [
+        chars[i:i + COLUMNS]
+        for i in xrange(0, len(chars), COLUMNS)
     ]
-    result[-1] = result[-1].ljust(MAX_COLUMNS_PER_PAGE)
-    result.extend([
-        ' ' * MAX_COLUMNS_PER_PAGE
-        for i in xrange(len(result), MAX_ROWS_PER_PAGE)
+
+
+def get_chars():
+    chars = get_grouped_chars()
+    chars[-1] = chars[-1].ljust(COLUMNS)
+    chars.extend([
+        ' ' * COLUMNS
+        for i in xrange(len(chars), ROWS)
     ])
-    return result
+    return chars
 
 
 def get_sample_chars():
