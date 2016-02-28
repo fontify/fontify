@@ -12,11 +12,20 @@
     <script type="text/javascript">
     $(function() {
         $("#font-name-input").on("change keyup paste click", function(e) {
+            if (/^[a-zA-Z0-9]+$/i.test(e.target.value) === false) {
+                $("#font-name-validation").text("Invalid input, only alphnumeric");
+                $("#font-name-validation").addClass("alert");
+                $("#submit-all").attr("disabled", true);
+            } else {
+                $("#font-name-validation").text("Enter a name for your awesome font");
+                $("#font-name-validation").removeClass("alert");
+                $("#submit-all").attr("disabled", false);
+            }
             $("#font-name").val(e.target.value);
         });
     });
     </script>
-    <p>Enter a name for your awesome font</p>
+    <p id = "font-name-validation">Enter a name for your awesome font</p>
 </div>
 
 <div class="upload">
