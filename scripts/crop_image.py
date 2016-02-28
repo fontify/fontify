@@ -1,10 +1,21 @@
-from PIL import Image, ImageChops
+from PIL import Image, ImageChops, ImageFilter
+
+from data import PERCENTAGE_TO_CROP
 
 
-def _trim(im):
+def _trim(origin_im):
+    width, height = origin_im.size
+    left  = int(PERCENTAGE_TO_CROP * width)
+    upper = int(PERCENTAGE_TO_CROP * height)
+    right = int((1 - PERCENTAGE_TO_CROP) * width)
+    lower = int((1 - PERCENTAGE_TO_CROP) * height)
+
+    im = origin_im.crop((left, upper, right, lower))
+    im = im.filter(ImageFilter.GaussianBlur(radius=3))
+
     bg = Image.new(im.mode, im.size, im.getpixel((0,0)))
     diff = ImageChops.difference(im, bg)
-    # diff = ImageChops.add(diff, diff, 2.0, -100)
+    diff = ImageChops.add(diff, diff, 2.0, -100)
     bbox = diff.getbbox()
     if bbox:
       return im.crop(bbox)
