@@ -39,6 +39,7 @@ def process(tmpdir, image, font_name):
     svgdir = os.path.join(tmpdir, 'svg')
     subprocess.call(
         [sh_fullpath, font_name, svgdir, os.path.join(tmpdir, 'fontify.ttf')],
+        cwd=scriptdir
     )
 
 
