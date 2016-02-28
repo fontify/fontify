@@ -5,10 +5,46 @@
 <h1>Cheers!</h1>
 <p id="ready-to-use" class="subtitle">Your font is ready to use!</p>
 <a href="/download/{{ key }}/fontify.ttf"><button class="gradient-rect">download .ttf file</button></a>
-<form method="POST" action="/email/{{ key }}/fontify.ttf">
-    <input name="email" placeholder="example@gmail.com"></input>
-    <input class="gradient-rect" type="submit">send via email</input>
-</form>
+
+<!-- 
+<p style="margin-top: 20px;">Send via email</p>
+<style type="text/css">
+#email-form {
+    position: relative;
+    width: 360px;
+    margin: auto;
+}
+#email {
+    border: none;
+    outline: none;
+    height: 32px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 20px;
+    color: RGB(81, 149, 72);
+    
+    position: absolute;
+    top: 2px;
+    left: 0;
+}
+#email-submit {
+    border: none;
+    outline: none;
+    height: 32px;
+    border-radius: 4px;
+    padding: 5px 14px;
+    font-size: 14px;
+    margin-bottom: 2px;
+
+    position: absolute;
+    top: 2px;
+    right: 0;
+}
+</style>
+<form id="email-form" method="POST" action="/email/{{ key }}/fontify.ttf">
+    <input id="email" name="email" placeholder="example@gmail.com"></input>
+    <input id="email-submit" class="gradient-rect" type="submit" value="Submit">
+</form> -->
 
 <style type="text/css">
 @font-face {

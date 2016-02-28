@@ -9,7 +9,7 @@ from flask import redirect
 from flask import make_response
 from flask import render_template
 from flask import jsonify
-from flask.ext.mandrill import Mandrill
+# from flask.ext.mandrill import Mandrill
 from pdfkit import from_string
 from data import get_chars
 from data import get_sample_chars
@@ -22,8 +22,8 @@ ALLOWED_EXTENSIONS = set(['jpg', 'png', 'jpeg'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
-app.config.from_envvar('FONTIFY_SETTINGS')
-mandrill = Mandrill(app)
+# app.config.from_envvar('FONTIFY_SETTINGS')
+# mandrill = Mandrill(app)
 
 
 @app.route("/")
@@ -74,10 +74,10 @@ def download(key, fontname):
 def email(key, fontname):
     recipient = request.form['email']
     addr = url_for('download', key=key, fontname=fontname)
-    mandrill.send_email(
-        to=[{'email': recipient}],
-        html=render_template('email.html', addr=addr)
-    )
+    # mandrill.send_email(
+    #     to=[{'email': recipient}],
+    #     html=render_template('email.html', addr=addr)
+    # )
     return redirect(url_for('finish', key=key, fontname=fontname))
 
 
