@@ -10,7 +10,7 @@ from data import (MAX_COLUMNS_PER_PAGE,
                   get_flat_chars,
                   PERCENTAGE_TO_CROP_CHAR_IMG,
                   CUT_CHAR_IMGS_DIR)
-from crop_image import crop, crop_by_percentage
+from crop_image import crop, trim
 
 
 def _calculate_actual_pixels(image_width, image_height):
@@ -42,6 +42,8 @@ def _calculate_actual_pixels(image_width, image_height):
 def cut(filepath):
     im = Image.open(filepath)
     imdir = os.path.dirname(filepath)
+    if imdir == "":
+        imdir = "."
     image_width, image_height = im.size
 
     actual_pixels = _calculate_actual_pixels(image_width, image_height)
@@ -57,7 +59,7 @@ def cut(filepath):
         lower = upper + box_height
 
         char_im = im.crop((left, upper, right, lower))
-        char_im = crop_by_percentage(char_im, PERCENTAGE_TO_CROP_CHAR_IMG)
+        char_im = trim(char_im, PERCENTAGE_TO_CROP_CHAR_IMG, False)
         char_im.save("{}/bmp/{}.bmp".format(imdir, hex(ord(char))))
 
         col += 1
