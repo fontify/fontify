@@ -1,6 +1,6 @@
 import os
-import cv2
-import numpy
+# import cv2
+# import numpy
 from PIL import Image, ImageChops, ImageFilter
 
 from data import PERCENTAGE_TO_CROP_SCAN_IMG, CROPPED_IMG_NAME
@@ -16,31 +16,31 @@ def crop_by_percentage(origin_im, percentage):
     return im
 
 
-def _restore_if_tild(filepath): # useless for now
-    img = cv2.imread(filepath, 0)
-    img = cv2.medianBlur(img, 5)
+# def _restore_if_tild(filepath): # useless for now
+#     img = cv2.imread(filepath, 0)
+#     img = cv2.medianBlur(img, 5)
 
-    import pdb
-    pdb.set_trace()
+#     import pdb
+#     pdb.set_trace()
 
-    cimg = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
-    circles = cv2.HoughCircles(img, cv2.cv.CV_HOUGH_GRADIENT, 1, 500, param1=50, param2=30, minRadius=10, maxRadius=1000)
+#     cimg = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
+#     circles = cv2.HoughCircles(img, cv2.cv.CV_HOUGH_GRADIENT, 1, 500, param1=50, param2=30, minRadius=10, maxRadius=1000)
 
-    pdb.set_trace()
+#     pdb.set_trace()
 
-    circles = numpy.uint16(numpy.around(circles))
-    pdb.set_trace()
+#     circles = numpy.uint16(numpy.around(circles))
+#     pdb.set_trace()
 
-    for i in circles[0,:]:
-        # draw the outer circle
-        cv2.circle(cimg,(i[0],i[1]),i[2],(0,255,0),2)
-        # draw the center of the circle
-        cv2.circle(cimg,(i[0],i[1]),2,(0,0,255),3)
+#     for i in circles[0,:]:
+#         # draw the outer circle
+#         cv2.circle(cimg,(i[0],i[1]),i[2],(0,255,0),2)
+#         # draw the center of the circle
+#         cv2.circle(cimg,(i[0],i[1]),2,(0,0,255),3)
 
-    # cv2.imshow('detected circles',cimg)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
-    cv2.imwrite("detected_circles.bmp", cimg)
+#     # cv2.imshow('detected circles',cimg)
+#     # cv2.waitKey(0)
+#     # cv2.destroyAllWindows()
+#     cv2.imwrite("detected_circles.bmp", cimg)
 
 
 def trim(origin_im, pre_percentage=None, upper_lower_cut=True):
