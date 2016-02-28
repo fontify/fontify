@@ -49,6 +49,7 @@ def file_upload():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # return redirect(url_for('uploaded_file', filename=filename))
+            print filename
             return "save sucess"
     return "lalala"
 
