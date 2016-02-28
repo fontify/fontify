@@ -14,4 +14,8 @@ virtualenv env
 source env/bin/activate
 pip install -r requirements.txt
 python hello.py
+
+git submodule init
+git submodule update
+brew install fontforge
 ```

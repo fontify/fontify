@@ -13,8 +13,8 @@ from data import get_chars
 from data import get_sample_chars
 from data import TMPL_OPTIONS
 
-UPLOAD_FOLDER = '../upload'
-DOWNLOAD_FOLDER = '../download'
+UPLOAD_FOLDER = './upload'
+DOWNLOAD_FOLDER = './download'
 ALLOWED_EXTENSIONS = set(['jpg', 'png', 'jpeg'])
 
 app = Flask(__name__)
