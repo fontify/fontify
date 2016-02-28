@@ -13,7 +13,7 @@ Dropzone.options.uploadDropzone = {
     this.on("error", function(file, errorMessage) {
       $("#upload-file-validation").text("Please upload only jpg, png or jpeg file");
       $("#upload-file-validation").addClass("alert");
-      this.removeFile(file);
+      this.removeAllFiles(file);
       $("#submit-all").hide();
     });
 
@@ -32,6 +32,7 @@ Dropzone.options.uploadDropzone = {
       $("#upload-file-validation").removeClass("alert");
       this.removeAllFiles();
       this.addFile(file);
+      $("#submit-all").show();
     });
 
   },
