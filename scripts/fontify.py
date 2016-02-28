@@ -38,9 +38,7 @@ def process(tmpdir, image, font_name):
     sh_fullpath = os.path.join(scriptdir, 'svg_to_ttf.sh')
     svgdir = os.path.join(tmpdir, 'svg')
     subprocess.call(
-        [sh_fullpath, font_name, svgdir, os.path.join(tmpdir, 'svg')],
-        #['ls'],
-        cwd=tmpdir
+        [sh_fullpath, font_name, svgdir, tmpdir],
     )
 
 
