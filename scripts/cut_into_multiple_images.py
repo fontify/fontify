@@ -1,8 +1,8 @@
 import os
 from PIL import Image, ImageChops
 
-from data import (MAX_COLUMNS_PER_PAGE,
-                  MAX_ROWS_PER_PAEG,
+from data import (COLUMNS,
+                  ROWS,
                   RELA_PIXELS_CHARACTER_BAR_HEIGHT,
                   RELA_PIXELS_WRITING_BOX_HEIGHT,
                   RELA_PIXELS_WRITING_BOX_WIDTH,
@@ -15,10 +15,10 @@ from crop_image import crop, trim
 
 def _calculate_actual_pixels(image_width, image_height):
     rela_width_unit_percentage  = (1.0 / (RELA_PIXELS_BORDER_WIDTH * 2 +
-                                          MAX_COLUMNS_PER_PAGE *
+                                          COLUMNS *
                                           (RELA_PIXELS_WRITING_BOX_WIDTH + 1)))
     rela_height_unit_percentage = (1.0 / (RELA_PIXELS_BORDER_WIDTH * 2 +
-                                          MAX_ROWS_PER_PAEG * 
+                                          ROWS * 
                                           (RELA_PIXELS_WRITING_BOX_HEIGHT +
                                            RELA_PIXELS_CHARACTER_BAR_HEIGHT
                                            + 1)))
