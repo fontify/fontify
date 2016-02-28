@@ -27,9 +27,18 @@ th, td {
 }
 
 .ref-line-top {
-	top: 19px;
+	top: 27px;
 }
 
 .ref-line-bottom {
-	top: 69px;
+	top: 63px;
+}
+
+.sample-char {
+	color: #ddd;
+	font-family: Georgia;
+	font-style: italic;
+	text-align: center;
+	font-size: 76px;
+	line-height: 75px;
 }

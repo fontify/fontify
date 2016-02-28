@@ -2,19 +2,22 @@
 <table>
 {% for c_row in chars %}
   <tr>
-    {% for c in c_row %}
-      <th>{{ c }}</th>
-    {% endfor %}
+  {% for c in c_row %}
+    <th>{{ c }}</th>
+  {% endfor %}
   </tr>
   <tr>
-    {% for c in c_row %}
-      <td>
-        <div class="char-cell">
-          <div class="ref-line-top"></div>
-          <div class="ref-line-bottom"></div>
-        </div>
-      </td>
-    {% endfor %}
+  {% for c in c_row %}
+    <td>
+      <div class="char-cell">
+        <div class="ref-line-top"></div>
+        <div class="ref-line-bottom"></div>
+      {% if c == ' ' %}
+        <div class="sample-char">{{ sample.next() }}</div>
+      {% endif %}
+      </div>
+    </td>
+  {% endfor %}
   </tr>
 {% endfor %}
 </table>

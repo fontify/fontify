@@ -5,6 +5,7 @@ from flask import make_response
 from flask import render_template
 from pdfkit import from_string
 from data import get_chars
+from data import get_sample_chars
 from werkzeug import secure_filename
 
 UPLOAD_FOLDER = '/tmp'
@@ -25,7 +26,8 @@ def index():
 def template():
     html = render_template(
         'template.html',
-        chars=get_chars()
+        chars=get_chars(),
+        sample=get_sample_chars()
     )
     pdf = from_string(html, False, css='static/template.css')
     response = make_response(pdf)
