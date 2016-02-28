@@ -13,7 +13,7 @@
     $(function() {
         $("#font-name-input").on("change keyup paste click", function(e) {
             if (/^[a-zA-Z0-9]+$/i.test(e.target.value) === false) {
-                $("#font-name-validation").text("Please enter alphnumeric letters");
+                $("#font-name-validation").text("Please enter alphanumeric characters");
                 $("#font-name-validation").addClass("alert");
                 $("#submit-all").attr("disabled", true);
             } else {

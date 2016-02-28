@@ -61,6 +61,14 @@ p.subtitle {
 .gradient-rect.lighter {
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
 }
+.gradient-rect[disabled] {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4)) !important;
+    opacity: 0.7;
+}
+.gradient-rect[disabled]:active {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4)) !important;
+    opacity: 0.7;
+}
 
 button {
     cursor: pointer;
@@ -104,6 +112,16 @@ button.gradient-rect:active {
 .upload .dz-message {
     font-size: 32px;
     margin: 20px 0 !important;
+}
+.upload .dz-preview {
+    background-color: transparent !important;
+}
+.upload .dz-progress {
+    top: 80% !important;
+}
+
+.alert {
+    font-weight: bold;
 }
 
 .use-font {
