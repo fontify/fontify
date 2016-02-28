@@ -49,7 +49,7 @@ p.subtitle {
 }
 
 .gradient-rect {
-    background-color: transparent;
+    background-color: transparent !important;
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.75)) !important;
     color: RGB(81, 149, 72);
     border: 0;
@@ -92,10 +92,12 @@ button.gradient-rect:active {
     text-align: center;
 }
 *::-webkit-input-placeholder {
-    color: RGB(81, 149, 72);
+    color: RGBA(81, 149, 72, 0.4);
+    text-shadow: none;
 }
 *::-moz-placeholder {
-    color: RGB(81, 149, 72);
+    color: RGBA(81, 149, 72, 0.4);
+    text-shadow: none;
 }
 
 .upload {
@@ -122,6 +124,7 @@ button.gradient-rect:active {
 
 .alert {
     font-weight: bold;
+    color: rgb(255, 235, 45);
 }
 
 .use-font {
