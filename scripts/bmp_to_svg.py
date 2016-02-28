@@ -26,7 +26,7 @@ def bmp_to_svg(basedir):
             infile = outfile
             outfile = os.path.join(basedir, 'svg', name + '.svg')
             ret = subprocess.call(
-                ['potrace', '-s', infile, '-o', outfile]
+                ['potrace', '-s', infile, '-H', '1', '-o', outfile]
             )
             if ret != 0:
                 sys.stderr.write("Error converting %s to svg\n" % infile)
