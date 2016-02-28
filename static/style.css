@@ -41,7 +41,7 @@ button {
     color: RGB(81, 149, 72);
     border: 0;
     border-radius: 40px;
-    box-shadow: 2px 2px 1px RGB(81, 149, 72);
+    box-shadow: 2px 3px 0 RGB(81, 149, 72);
 }
 button:active {
     background-color: rgba(255, 255, 255, 0.9);
@@ -55,9 +55,9 @@ button:active {
     width: 320px;
     height: 80px;
     border: 0;
-    border-radius: 40px;
+    border-radius: 12px;
+    border: 5px solid rgba(136, 196, 37, 0.3);
     outline: none;
-    box-shadow: 2px 2px 1px RGB(81, 149, 72);
     font-size: 32px;
     padding: 0 40px;
     text-align: center;
@@ -87,4 +87,23 @@ button:active {
     text-shadow: none;
     font-size: 28px;
     margin: 20px 0 !important;
+}
+
+.use-font {
+    margin-top: 48px;
+}
+.use-font .subtitle {
+    margin-bottom: 0;
+}
+
+pre {
+    text-align: left;
+    width: 480px;
+    margin: auto;
+    border-radius: 20px;
+    padding: 16px 24px;
+    background-color: white;
+    color: RGB(27, 103, 107);
+    text-shadow: none;
+    box-shadow: 2px 3px 0 RGB(81, 149, 72);
 }

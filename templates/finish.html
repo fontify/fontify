@@ -1,13 +1,28 @@
 {% extends "base.html" %}
-{% block title %}Fontify - Use Your Own Font!{% endblock %}
+{% block title %}Fontify - Your Font is Ready to Use!{% endblock %}
 
 {% block body %}
+<style type="text/css">
+h1 {
+    margin: 0;
+    font-size: 80px;
+}
+</style>
 <h1>Cheers</h1>
-<p class="subtitle">Your font is ready for use!</p>
-<a href="/ttf"><button type="button">download ttf file</button></a>
+<p class="subtitle">Your font is ready to use!</p>
+<a href="/ttf"><button type="button">download .ttf file</button></a>
 
 <div class="use-font">
-	<p>Use as webfont</p>
-    <textarea placeholder="FontifySans"></textarea>
+	<p class="subtitle">Use as webfont</p>
+    <p>Add the following lines to your CSS:</p>
+    <pre>@font-face {
+  font-family: FontifySans;
+  src: url(http://fontifyapp.com/FontifySans.woff);
+}
+
+/* Then use FontifySans like this: */
+p {
+  font-family: FontifySans, sans-serif;
+}</pre>
 </div>
 {% endblock %}
