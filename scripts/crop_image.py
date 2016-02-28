@@ -3,14 +3,19 @@ from PIL import Image, ImageChops, ImageFilter
 from data import PERCENTAGE_TO_CROP
 
 
-def _trim(origin_im):
-    width, height = origin_im.size
-    left  = int(PERCENTAGE_TO_CROP * width)
-    upper = int(PERCENTAGE_TO_CROP * height)
-    right = int((1 - PERCENTAGE_TO_CROP) * width)
-    lower = int((1 - PERCENTAGE_TO_CROP) * height)
 
+def crop_by_percentage(origin_im, percentage):
+    width, height = origin_im.size
+    left  = int(percentage * width)
+    upper = int(percentage * height)
+    right = int((1 - percentage) * width)
+    lower = int((1 - percentage) * height)
     im = origin_im.crop((left, upper, right, lower))
+    return im
+
+
+def _trim(origin_im):
+    im = crop_by_percentage(origin_im, PERCENTAGE_TO_CROP)
     im = im.filter(ImageFilter.GaussianBlur(radius=3))
 
     bg = Image.new(im.mode, im.size, im.getpixel((0,0)))
