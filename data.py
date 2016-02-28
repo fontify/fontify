@@ -1,6 +1,9 @@
 import string
 
-COLUMNS = 10
+COLUMNS = 14
+TMPL_OPTIONS = {
+    'page-size': 'Letter'
+}
 
 
 def get_flat_chars():

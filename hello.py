@@ -10,6 +10,7 @@ from flask import render_template
 from pdfkit import from_string
 from data import get_chars
 from data import get_sample_chars
+from data import TMPL_OPTIONS
 from werkzeug import secure_filename
 
 UPLOAD_FOLDER = '/tmp'
@@ -40,7 +41,12 @@ def template():
         chars=get_chars(),
         sample=get_sample_chars()
     )
-    pdf = from_string(html, False, css='static/template.css')
+    pdf = from_string(
+        html,
+        False,
+        options=TMPL_OPTIONS,
+        css='static/template.css'
+    )
     response = make_response(pdf)
     response.headers['Content-Disposition'] = "filename=template.pdf"
     response.mimetype = 'application/pdf'
