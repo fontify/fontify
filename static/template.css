@@ -1,13 +1,12 @@
 h1 {
 	text-align: center;
-	margin-bottom: 50px;
+	margin-bottom: 35px;
 }
 
 table {
-	position: relative;
 	border-spacing: 0px;
+	border-collapse: collapse;
 	border: 2px solid black;
-	margin-left: 15px;
 }
 
 th, td {
@@ -48,7 +47,7 @@ th, td {
 	line-height: 50px;
 }
 
-table:before, table:after {
+.anchor {
 	content: "";
 	background-color: black;
 	position: absolute;
@@ -57,13 +56,18 @@ table:before, table:after {
 	border-radius: 50%;
 }
 
-table:before {
-	top: -15px;
-	left: -15px;
+.upper {
+	top: 0px;
+	left: 0px;
 }
 
-table:after {
-	bottom: -15px;
-	right: -15px;
+.lower {
+	bottom: 0px;
+	right: 0px;
 }
 
+.wrapper {
+	display: inline-block;
+	position: relative;
+	padding: 15px;
+}
