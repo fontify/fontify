@@ -49,7 +49,7 @@ th, td {
 
 .anchor {
 	content: "";
-	background-color: black;
+	/*background-color: black;*/
 	position: absolute;
 	width: 30px;
 	height: 30px;
