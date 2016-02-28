@@ -4,10 +4,10 @@ COLUMNS = 10
 
 
 def get_flat_chars():
-    chars = string.lowercase
-    chars += string.uppercase
-    chars += string.octdigits
-    chars += string.punctuation
+    chars = unicode(string.lowercase)
+    chars += unicode(string.uppercase)
+    chars += unicode(string.octdigits)
+    chars += unicode(string.punctuation)
     return chars
 
 
