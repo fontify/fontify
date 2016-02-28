@@ -5,13 +5,22 @@ html {
   box-sizing: inherit;
 }
 
+a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 600;
+}
+a:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
 body {
     text-align: center;
     font-family: "Avenir Next", sans-serif;
     color: white;
     text-shadow: 0 1px 0 RGB(81, 149, 72);
     background-color: RGB(136, 196, 37);
-    padding: 50px 0;
+    padding: 50px 0 30px 0;
 }
 
 h1 {
@@ -106,4 +115,11 @@ pre {
     color: RGB(27, 103, 107);
     text-shadow: none;
     box-shadow: 2px 3px 0 RGB(81, 149, 72);
+}
+
+footer {
+    margin-top: 40px;
+}
+footer p {
+    margin: 6px 0;
 }
