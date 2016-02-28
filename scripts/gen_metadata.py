@@ -10,8 +10,8 @@ metadata = {
         "em": 1000,
         "family": sys.argv[1]
     },
-    "input": "svg",
-    "output": ["fontify.ttf"],
+    "input": sys.argv[2],
+    "output": [sys.argv[3]],
     "glyphs": {}
 }
 
