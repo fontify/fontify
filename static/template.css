@@ -5,9 +5,9 @@ h1 {
 
 table {
 	position: relative;
-	border-collapse: collapse;
 	border-spacing: 0px;
 	border: 2px solid black;
+	margin-left: 15px;
 }
 
 th, td {
@@ -48,7 +48,8 @@ th, td {
 	line-height: 50px;
 }
 
-.anchor {
+table:before, table:after {
+	content: "";
 	background-color: black;
 	position: absolute;
 	width: 30px;
@@ -56,12 +57,13 @@ th, td {
 	border-radius: 50%;
 }
 
-.upper {
-	top: 0;
-	left: 0;
+table:before {
+	top: -15px;
+	left: -15px;
 }
 
-.lower {
-	bottom: 0;
-	right: 0;
+table:after {
+	bottom: -15px;
+	right: -15px;
 }
+

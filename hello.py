@@ -24,16 +24,12 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def index():
-    return render_template(
-        'index.html'
-    )
+    return render_template('index.html')
 
 
 @app.route("/finish")
 def finish():
-    return render_template(
-        'finish.html'
-    )
+    return render_template('finish.html')
 
 
 @app.route("/template")
@@ -77,8 +73,7 @@ def upload_file():
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == "__main__":
     app.run(debug=True)
