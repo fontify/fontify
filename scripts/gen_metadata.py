@@ -2,6 +2,7 @@
 import sys
 import json
 import os
+import re
 
 from data import get_flat_chars
 
@@ -22,11 +23,19 @@ chars = get_flat_chars()
 for c in chars:
     glyph_key = str(hex(ord(c)))
     svg_name = glyph_key + ".svg"
-    if not os.path.isfile(os.path.join(sys.argv[2], svg_name)):
+    svg_path = os.path.join(sys.argv[2], svg_name)
+    if not os.path.isfile(svg_path):
         sys.stderr.write("%s not exists, skipped.\n" % svg_name)
         continue
+
+    with open(svg_path) as f:
+        content = f.read()
+        result = re.search('width="(\d+\.\d+)pt"', content)
+        width = float(result.groups()[0]) / 72 * 1000
+
     metadata["glyphs"][glyph_key] = {
-        "src": svg_name
+        "src": svg_name,
+        "width": width
     }
 
 print json.dumps(metadata, indent=2)
