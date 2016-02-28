@@ -15,12 +15,12 @@ Dropzone.options.uploadDropzone = {
 
     this.on("success", function(file, response) {
       console.log(response);
-      window.location="/finish";
+      window.location="/finish?key=" + response.key + "&font-name=" + response.font_name;
     });
   },
   paramName: "file", // The name that will be used to transfer the file
   maxFilesize: 20, // MB
   maxFiles: 1,
-  acceptedFiles: ".png, .jpg",
+  acceptedFiles: ".png, .jpg, .jpeg",
   dictDefaultMessage: "Drop image here<br>or click to upload"
 };
