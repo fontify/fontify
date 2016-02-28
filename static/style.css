@@ -108,11 +108,13 @@ button.gradient-rect:active {
 .use-font .subtitle {
     margin-bottom: 0;
 }
+textarea::-webkit-input-placeholder {
+    color: RGBA(81, 149, 72, 0.5);
+}
 
-pre {
+pre, textarea {
     text-align: left;
     width: 480px;
-    overflow-x: scroll;
     margin: auto;
     border-radius: 20px;
     padding: 16px 24px;
@@ -120,6 +122,9 @@ pre {
     color: RGB(27, 103, 107);
     text-shadow: none;
     box-shadow: 2px 3px 0 RGB(81, 149, 72);
+}
+pre {
+    overflow-x: scroll;
 }
 
 footer {

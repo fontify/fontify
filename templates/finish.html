@@ -3,15 +3,37 @@
 
 {% block body %}
 <h1>Cheers!</h1>
-<p class="subtitle">Your font is ready to use!</p>
+<p id="ready-to-use" class="subtitle">Your font is ready to use!</p>
 <a href="/download/{{ key }}/fontify.ttf"><button class="gradient-rect">download .ttf file</button></a>
+
+<style type="text/css">
+@font-face {
+    font-family: {{ font_name }};
+    src: url(/download/{{ key }}/fontify.woff);
+}
+textarea {
+    font-family: {{ font_name }};
+    font-size: 24px;
+    height: 200px;
+}
+.playground .subtitle {
+    margin-bottom: 10px;
+}
+</style>
+
+<div class="playground">
+    <p class="subtitle">Playground</p>
+    <p>See your own font in action!</p>
+    <textarea class="gradient-rect lighter" placeholder="I can eat glass, it does not hurt me."></textarea>
+</div>
+
 
 <div class="use-font">
     <p class="subtitle">Use as webfont</p>
     <p>Add the following lines to your CSS:</p>
     <pre class="gradient-rect lighter">@font-face {
   font-family: {{ font_name }};
-  src: url(http://fontifyapp.com/{{ font_name }}.woff);
+  src: url(http://fontifyapp.com/download/{{ key }}/fontify.woff);
 }
 
 /* Then use {{ font_name }} like this: */
