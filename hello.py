@@ -15,13 +15,11 @@ from data import TMPL_OPTIONS
 
 UPLOAD_FOLDER = '../upload'
 DOWNLOAD_FOLDER = '../download'
-FONT_NAME = 'fontify'
 ALLOWED_EXTENSIONS = set(['jpg', 'png', 'jpeg'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
-app.config['FONT_NAME'] = FONT_NAME
 
 
 @app.route("/")
@@ -32,7 +30,7 @@ def index():
 @app.route("/finish")
 def finish():
     key = request.args.get('key')
-    font_name = request.args.get('font-name', app.config['FONT_NAME'])
+    font_name = request.args.get('font-name')
     return render_template(
         'finish.html',
         key=key,
