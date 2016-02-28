@@ -23,8 +23,9 @@ RELA_PIXELS_BORDER_WIDTH = 5
 def get_flat_chars():
     chars = unicode(string.lowercase)
     chars += unicode(string.uppercase)
-    chars += unicode(string.octdigits)
+    chars += unicode(string.digits)
     chars += unicode(string.punctuation)
+    print chars
     return chars
 
 
@@ -37,4 +38,4 @@ def get_chars():
 
 
 def get_sample_chars():
-    return iter("AaBbCc")
+    return iter("AaBb")
