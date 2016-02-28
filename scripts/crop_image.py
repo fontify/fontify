@@ -1,7 +1,8 @@
 import os
-# import cv2
-# import numpy
+import cv2
+import numpy as np
 from PIL import Image, ImageChops, ImageFilter
+import math
 
 from data import PERCENTAGE_TO_CROP_SCAN_IMG, CROPPED_IMG_NAME
 
@@ -16,31 +17,52 @@ def crop_by_percentage(origin_im, percentage):
     return im
 
 
-# def _restore_if_tild(filepath): # useless for now
-#     img = cv2.imread(filepath, 0)
-#     img = cv2.medianBlur(img, 5)
 
-#     import pdb
-#     pdb.set_trace()
+def _detect_circles(filepath):
+    tempfile_name = "wait_for_detect.bmp"
+    origin_im = Image.open(filepath)
+    im_blurred = origin_im.filter(ImageFilter.GaussianBlur(radius=10))
+    im_blurred.save(tempfile_name)
 
-#     cimg = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
-#     circles = cv2.HoughCircles(img, cv2.cv.CV_HOUGH_GRADIENT, 1, 500, param1=50, param2=30, minRadius=10, maxRadius=1000)
+    img = cv2.imread(tempfile_name,0)
+    img = cv2.medianBlur(img,5)
+    circles = cv2.HoughCircles(img,cv2.cv.CV_HOUGH_GRADIENT,1,20,
+                               param1=50,param2=30,minRadius=10,maxRadius=500)
+    circles = np.uint16(np.around(circles))
 
-#     pdb.set_trace()
+    two_circles = []
+    for i in circles[0,:]:
+        two_circles.append((i[0], i[1], i[2]))
 
-#     circles = numpy.uint16(numpy.around(circles))
-#     pdb.set_trace()
+    top_circle = two_circles[0]
+    bottom_circle = two_circles[1]
+    if top_circle[1] > bottom_circle[1]: #[0] => width, [1] => height
+        temp = bottom_circle
+        bottom_circle = top_circle
+        top_circle = temp
 
-#     for i in circles[0,:]:
-#         # draw the outer circle
-#         cv2.circle(cimg,(i[0],i[1]),i[2],(0,255,0),2)
-#         # draw the center of the circle
-#         cv2.circle(cimg,(i[0],i[1]),2,(0,0,255),3)
+    return top_circle, bottom_circle
 
-#     # cv2.imshow('detected circles',cimg)
-#     # cv2.waitKey(0)
-#     # cv2.destroyAllWindows()
-#     cv2.imwrite("detected_circles.bmp", cimg)
+
+def _restore_if_tilt(filepath):
+    top_circle, bottom_circle = _detect_circles(filepath)
+
+    expected_K = 1207.0 / 995
+    expected_angle = math.atan(expected_K)
+
+    actual_K = float(bottom_circle[1] - top_circle[1]) / (bottom_circle[0] - top_circle[0])
+    actual_angle = math.atan(actual_K)
+
+    origin_im = Image.open(filepath)
+    rotate_angle = (actual_angle - expected_angle) / math.pi * 180 + 0.25
+
+    print "rotate: {} degrees".format(rotate_angle)
+
+    rotated_im = origin_im.rotate(rotate_angle)
+    restored_image_filename = "restored_image.bmp"
+    rotated_im.save(restored_image_filename)
+
+    return restored_image_filename
 
 
 def trim(origin_im, blur=True,
@@ -73,8 +95,13 @@ def trim(origin_im, blur=True,
 
 
 def crop_whole(filepath):
-    im = Image.open(filepath)
-    im = trim(im)
+    restored_filepath = _restore_if_tilt(filepath)
+    top_circle, bottom_circle = _detect_circles(restored_filepath)
+
+    im = Image.open(restored_filepath)
+    # im = trim(im)
+    im = im.crop((top_circle[0], top_circle[1], bottom_circle[0], bottom_circle[1]))
+
     trimmed_filepath = os.path.join(
         os.path.dirname(filepath),
         CROPPED_IMG_NAME

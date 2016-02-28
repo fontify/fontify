@@ -22,9 +22,9 @@ def cut(filepath):
             char = chars[i / cell_height][j / cell_width]
             if char == ' ':
                 return
-            bar_height = int(cell_height * 0.3)
+            bar_height = int(cell_height * 0.22)
             margin_width = int(cell_width * 0.1)
-            margin_height = int(cell_height * 0.05)
+            margin_height = int(cell_height * 0.1)
             char_im = im.crop(
                 (
                     j + margin_width,
