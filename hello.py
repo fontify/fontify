@@ -30,7 +30,7 @@ def index():
 @app.route("/finish")
 def finish():
     key = request.args.get('key')
-    font_name = request.args.get('font-name')
+    font_name = request.args.get('fontname')
     return render_template(
         'finish.html',
         key=key,

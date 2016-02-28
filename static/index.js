@@ -24,7 +24,7 @@ Dropzone.options.uploadDropzone = {
     });
 
     this.on("success", function(file, response) {
-      window.location="/finish?key=" + response.key + "&font-name=" + response.font_name;
+      window.location="/finish?key=" + response.key + "&fontname=" + response.font_name;
     });
 
     this.on("maxfilesexceeded", function(file) {
