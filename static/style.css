@@ -123,3 +123,19 @@ footer {
 footer p {
     margin: 6px 0;
 }
+
+@media only screen and (max-device-width: 480px) {
+    body {
+        padding: 10px 0 20px 0;
+    }
+    h1 {
+        font-size: 72px;
+    }
+    p.subtitle {
+        font-size: 28px;
+    }
+    pre {
+        max-width: 100%;
+        overflow-x: scroll;
+    }
+}

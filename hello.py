@@ -71,6 +71,7 @@ def upload_file():
             return redirect(url_for('uploaded_file', filename=filename))
     return ''
 
+
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
