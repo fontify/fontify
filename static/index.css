@@ -17,9 +17,12 @@ body {
 h1 {
     margin: 20px 0 40px 0;
     font-size: 100px;
-    text-transform: lowercase;
     font-family: 'Pacifico', cursive;
     text-shadow: 3px 4px 0 RGB(81, 149, 72);
+}
+
+h1.index {
+    text-transform: lowercase;
 }
 
 p.subtitle {

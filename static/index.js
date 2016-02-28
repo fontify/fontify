@@ -12,8 +12,8 @@ Dropzone.options.uploadDropzone = {
   },
   init: function() {
     this.on("complete", function(file) { 
-        alert("completed uploading file");
-        this.removeFile(file);
+        // alert("completed uploading file");
+        // this.removeFile(file);
     });
   }
 };

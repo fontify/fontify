@@ -1,5 +1,5 @@
 # Fontify
-Make your own typeface from your writing!
+Make your own typeface from your handwriting!
 
 ## Development
 
