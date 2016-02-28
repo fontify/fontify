@@ -7,7 +7,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "Welcome to Fontify!"
+    return render_template(
+        'index.html'
+    )
 
 
 @app.route("/template")
@@ -18,4 +20,4 @@ def template():
     )
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
