@@ -41,12 +41,16 @@ def process(tmpdir, image, font_name):
         [sh_fullpath, font_name, svgdir, os.path.join(tmpdir, 'fontify.ttf')],
         cwd=scriptdir
     )
+    subprocess.call(
+        ['ttf2woff', os.path.join(tmpdir, 'fontify.ttf'), os.path.join(tmpdir, 'fontify.woff')],
+    )
 
 
 def tear_down(tmpdir, output):
     if output == "":
         output = "fontify.ttf"
     shutil.copyfile(os.path.join(tmpdir, 'fontify.ttf'), output)
+    shutil.copyfile(os.path.join(tmpdir, 'fontify.woff'), output[:-3] + 'woff')
     print(tmpdir)
     # shutil.rmtree(tmpdir)
 
