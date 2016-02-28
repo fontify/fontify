@@ -11,7 +11,7 @@ Dropzone.options.uploadDropzone = {
     });
 
     this.on("error", function(file, errorMessage) {
-      $("#upload-file-validation").text("Please upload only jpg, png or jpeg file");
+      $("#upload-file-validation").text("Please upload jpg, png or jpeg file less than 20 MB");
       $("#upload-file-validation").addClass("alert");
       this.removeAllFiles(file);
       $("#submit-all").hide();
