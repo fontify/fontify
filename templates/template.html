@@ -3,7 +3,7 @@
 {% for c_row in chars %}
   <tr>
   {% for c in c_row %}
-    <th>{{ c }}</th>
+    <th{% if c == ' ' %} class="empty"{% endif %}>{{ c }}</th>
   {% endfor %}
   </tr>
   <tr>

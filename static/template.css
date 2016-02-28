@@ -6,7 +6,7 @@ h1 {
 table {
 	border-collapse: collapse;
 	border-spacing: 0px;
-	border: 5px solid black;
+	border: 2px solid black;
 }
 
 th, td {
@@ -15,30 +15,34 @@ th, td {
 }
 
 .char-cell {
-	height: 90px;
-	width: 90px;
+	height: 60px;
+	width: 60px;
 	position: relative;
 }
 
 .ref-line-top, .ref-line-bottom {
 	position: absolute;
 	width: 100%;
-	border-bottom: 2px dotted #ddd;
+	border-bottom: 2px solid #ccc;
 }
 
 .ref-line-top {
-	top: 27px;
+	top: 15px;
 }
 
 .ref-line-bottom {
-	top: 63px;
+	top: 45px;
+}
+
+.empty {
+	height: 30px;
 }
 
 .sample-char {
-	color: #ddd;
+	color: #ccc;
 	font-family: Georgia;
 	font-style: italic;
 	text-align: center;
-	font-size: 76px;
-	line-height: 75px;
+	font-size: 60px;
+	line-height: 50px;
 }
