@@ -1,5 +1,5 @@
 import os
-from PIL import Image, ImageChops
+from PIL import Image
 
 from data import (MAX_COLUMNS_PER_PAGE,
                   MAX_ROWS_PER_PAGE,
@@ -8,9 +8,8 @@ from data import (MAX_COLUMNS_PER_PAGE,
                   RELA_PIXELS_WRITING_BOX_WIDTH,
                   RELA_PIXELS_BORDER_WIDTH,
                   get_flat_chars,
-                  PERCENTAGE_TO_CROP_CHAR_IMG,
-                  CUT_CHAR_IMGS_DIR)
-from crop_image import crop, trim
+                  PERCENTAGE_TO_CROP_CHAR_IMG)
+from crop_image import trim
 
 
 def _calculate_actual_pixels(image_width, image_height):
@@ -18,10 +17,10 @@ def _calculate_actual_pixels(image_width, image_height):
                                           MAX_COLUMNS_PER_PAGE *
                                           (RELA_PIXELS_WRITING_BOX_WIDTH + 1)))
     rela_height_unit_percentage = (1.0 / (RELA_PIXELS_BORDER_WIDTH * 2 +
-                                          MAX_ROWS_PER_PAGE * 
+                                          MAX_ROWS_PER_PAGE *
                                           (RELA_PIXELS_WRITING_BOX_HEIGHT +
-                                           RELA_PIXELS_CHARACTER_BAR_HEIGHT
-                                           + 1)))
+                                           RELA_PIXELS_CHARACTER_BAR_HEIGHT +
+                                           1)))
 
     actual_character_bar_height = (RELA_PIXELS_CHARACTER_BAR_HEIGHT *
                                    rela_height_unit_percentage * image_height)
@@ -63,7 +62,7 @@ def cut(filepath):
         char_im.save("{}/bmp/{}.bmp".format(imdir, hex(ord(char))))
 
         col += 1
-        if col >= 10:
+        if col >= MAX_COLUMNS_PER_PAGE:
             col = 0
             row += 1
 
@@ -72,10 +71,3 @@ if __name__ == "__main__":
     import sys
     image_filepath = sys.argv[1]
     cut(image_filepath)
-
-
-
-
-
-
-
