@@ -65,7 +65,7 @@ button {
     font-size: 32px;
 }
 button.gradient-rect:active {
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.65));
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.65)) !important;
 }
 
 .font-name {
