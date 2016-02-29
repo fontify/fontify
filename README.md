@@ -17,5 +17,7 @@ python hello.py
 
 git submodule init
 git submodule update
-brew install fontforge
+# install fontforge
+# install opencv
+# install cv2 (opencv binding for Python)
 ```
