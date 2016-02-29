@@ -71,4 +71,5 @@ target/
 
 
 scripts/metadata.json
-config.py
+upload
+download
